@@ -1,0 +1,429 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>dockerfile-language-server-nodejs</title>
+	<meta name="description" content="Documentation for dockerfile-language-server-nodejs">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="assets/css/main.css">
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="assets/js/search.json" data-base=".">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="index.html" class="title">dockerfile-language-server-nodejs</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-externals" checked />
+							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
+							<input type="checkbox" id="tsd-filter-only-exported" />
+							<label class="tsd-widget" for="tsd-filter-only-exported">Only exported</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<ul class="tsd-breadcrumb">
+				<li>
+					<a href="globals.html">Globals</a>
+				</li>
+			</ul>
+			<h1>dockerfile-language-server-nodejs</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<div class="tsd-panel tsd-typography">
+				<a href="#dockerfile-language-server" id="dockerfile-language-server" style="color: inherit; text-decoration: none;">
+					<h1>Dockerfile Language Server</h1>
+				</a>
+				<p><a href="https://travis-ci.org/rcjsuen/dockerfile-language-server-nodejs"><img src="https://travis-ci.org/rcjsuen/dockerfile-language-server-nodejs.svg?branch=master" alt="Build Status"></a> <a href="https://coveralls.io/github/rcjsuen/dockerfile-language-server-nodejs?branch=master"><img src="https://coveralls.io/repos/github/rcjsuen/dockerfile-language-server-nodejs/badge.svg?branch=master" alt="Coverage Status"></a> <a href="https://david-dm.org/rcjsuen/dockerfile-language-server-nodejs"><img src="https://david-dm.org/rcjsuen/dockerfile-language-server-nodejs.svg" alt="Build Dependencies"></a> <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT"></a></p>
+				<p>This is a language server for Dockerfiles powered by Node.js written in TypeScript.
+				To <a href="#installation-instructions">install and run</a> this language server, you will need to have either <a href="https://nodejs.org/en/download/">Node.js</a> or <a href="https://www.docker.com/get-docker">Docker</a> installed on your computer.</p>
+				<p><strong>Supported features:</strong></p>
+				<ul>
+					<li>code actions</li>
+					<li>code completion</li>
+					<li>definition</li>
+					<li>diagnostics</li>
+					<li>document highlight</li>
+					<li>document links</li>
+					<li>document symbols</li>
+					<li>folding ranges</li>
+					<li>formatting</li>
+					<li>hovers</li>
+					<li>prepare rename</li>
+					<li>rename</li>
+					<li>semantic highlighting (experimental support for the upcoming LSP 3.16 specification)</li>
+					<li>signature help</li>
+				</ul>
+				<p><strong>Projects that use this language server:</strong></p>
+				<ul>
+					<li><a href="https://github.com/Microsoft/vscode-docker">vscode-docker</a></li>
+					<li><a href="https://github.com/josa42/atom-ide-docker">atom-ide-docker</a></li>
+					<li><a href="https://sourcegraph.com/">Sourcegraph</a></li>
+					<li><a href="https://theia-ide.org/">Theia</a></li>
+					<li><a href="https://emacs-lsp.github.io/lsp-mode/">lsp-mode</a></li>
+				</ul>
+				<p>This repository only contains the code necessary for launching a Dockerfile language server that conforms to the language server protocol.
+				The actual code for parsing a Dockerfile and offering editor features such as code completion or hovers is not contained within this repository.</p>
+				<p>The code for analyzing and processing a Dockerfile is contained in the following three libraries:</p>
+				<ul>
+					<li><a href="https://github.com/rcjsuen/dockerfile-ast">dockerfile-ast</a> - parses a Dockerfile</li>
+					<li><a href="https://github.com/rcjsuen/dockerfile-language-service">dockerfile-language-service</a> - provides API functions for handling the different requests defined by the language server protocol</li>
+					<li><a href="https://github.com/rcjsuen/dockerfile-utils">dockerfile-utils</a> - validates and formats a Dockerfile, can be run from the CLI</li>
+				</ul>
+				<p>All of the language server protocol requests that help create a rich editing experience for the user is forwarded to the <code>dockerfile-language-service</code> library.
+					You can test its features <a href="https://rcjsuen.github.io/dockerfile-language-service/">right in the browser</a>.
+				This online editor is a very good representation of what is possible when this language server is connected to an editor that supports the language server protocol.</p>
+				<a href="#development-instructions" id="development-instructions" style="color: inherit; text-decoration: none;">
+					<h2>Development Instructions</h2>
+				</a>
+				<p>If you wish to build and compile this language server, you must first install <a href="https://nodejs.org/en/download/">Node.js</a> if you have not already done so.
+				After you have installed Node.js and cloned the repository with Git, you may now proceed to build and compile the language server with the following commands:</p>
+				<pre><code><span class="hljs-built_in">npm</span> install
+<span class="hljs-built_in">npm</span> run build
+<span class="hljs-built_in">npm</span> test</code></pre>
+				<p>If you are planning to change the code, use <code>npm run watch</code> to get the
+				TypeScript files transpiled on-the-fly as they are modified.</p>
+				<p>Once the code has finished compiling, you can connect a language server
+				client to the server via Node IPC, stdio, or sockets.</p>
+				<a href="#installation-instructions" id="installation-instructions" style="color: inherit; text-decoration: none;">
+					<h2>Installation Instructions</h2>
+				</a>
+				<p>To install this language server onto your computer, please install the
+					<a href="https://www.npmjs.com/package/dockerfile-language-server-nodejs">dockerfile-language-server-nodejs npm module</a>.
+				The <code>-g</code> flag will install the npm module globally onto your computer.</p>
+				<pre><code>npm <span class="hljs-keyword">install</span> -g dockerfile-<span class="hljs-keyword">language</span>-<span class="hljs-keyword">server</span>-nodejs</code></pre>
+				<p>After the installation has completed, you can start the language
+					server with the <code>docker-langserver</code> binary. You should specify
+					the desired method of communicating with the language server via one
+				of the three arguments shown below.</p>
+				<pre><code>docker-langserver --<span class="hljs-keyword">node</span><span class="hljs-title">-ipc</span>
+docker-langserver --stdio
+docker-langserver --<span class="hljs-attr">socket=</span><span class="hljs-tag">&lt;port&gt;</span></code></pre>
+				<a href="#docker-image" id="docker-image" style="color: inherit; text-decoration: none;">
+					<h3>Docker Image</h3>
+				</a>
+				<p>The <code>docker-langserver</code> binary is also available as a Docker image under the name <code>rcjsuen/docker-langserver</code>.</p>
+				<a href="#language-server-settings" id="language-server-settings" style="color: inherit; text-decoration: none;">
+					<h2>Language Server Settings</h2>
+				</a>
+				<p>Clients may send a <code>workspace/didChangeConfiguration</code> notification to
+				notify the server of settings changes.</p>
+				<p>The settings object that will be included with the notification must conform
+				to the following specification.</p>
+				<pre><code class="language-TypeScript"><span class="hljs-keyword">interface</span> Settings {
+  <span class="hljs-attr">docker</span>: {
+    <span class="hljs-attr">languageserver</span>: {
+      diagnostics?: {
+        <span class="hljs-comment">// string values must be equal to &quot;ignore&quot;, &quot;warning&quot;, or &quot;error&quot;</span>
+        deprecatedMaintainer?: <span class="hljs-built_in">string</span>,
+        directiveCasing?: <span class="hljs-built_in">string</span>,
+        emptyContinuationLine?: <span class="hljs-built_in">string</span>,
+        instructionCasing?: <span class="hljs-built_in">string</span>,
+        instructionCmdMultiple?: <span class="hljs-built_in">string</span>,
+        instructionEntrypointMultiple?: <span class="hljs-built_in">string</span>,
+        instructionHealthcheckMultiple?: <span class="hljs-built_in">string</span>,
+        instructionJSONInSingleQuotes?: <span class="hljs-built_in">string</span>
+      }
+    }
+  }
+}</code></pre>
+				<a href="#communicating-with-the-server" id="communicating-with-the-server" style="color: inherit; text-decoration: none;">
+					<h2>Communicating with the Server</h2>
+				</a>
+				<a href="#node-ipc" id="node-ipc" style="color: inherit; text-decoration: none;">
+					<h3>Node IPC</h3>
+				</a>
+				<p>With the <code>child_process</code> API, you can <code>fork()</code> a new Node.js process
+					running the language server and communicate with it using <code>send(message)</code>
+				and <code>on(&#39;message&#39;, ...)</code>.</p>
+				<pre><code class="language-TypeScript"><span class="hljs-keyword">import</span> * <span class="hljs-keyword">as</span> child_process <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;child_process&quot;</span>;
+
+<span class="hljs-keyword">let</span> lspProcess = child_process.fork(<span class="hljs-string">&quot;out/src/server.js&quot;</span>, [ <span class="hljs-string">&quot;--node-ipc&quot;</span> ]);
+<span class="hljs-keyword">let</span> messageId = <span class="hljs-number">1</span>;
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">send</span>(<span class="hljs-params">method: <span class="hljs-built_in">string</span>, params: <span class="hljs-built_in">object</span></span>) </span>{
+    <span class="hljs-keyword">let</span> message = {
+        <span class="hljs-attr">jsonrpc</span>: <span class="hljs-string">&quot;2.0&quot;</span>,
+        <span class="hljs-attr">id</span>: messageId++,
+        method: method,
+        <span class="hljs-attr">params</span>: params
+    };
+    lspProcess.send(message);
+}
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">initialize</span>(<span class="hljs-params"></span>) </span>{
+    send(<span class="hljs-string">&quot;initialize&quot;</span>, {
+        <span class="hljs-attr">rootPath</span>: process.cwd(),
+        <span class="hljs-attr">processId</span>: process.pid,
+        <span class="hljs-attr">capabilities</span>: {
+            <span class="hljs-comment">/* ... */</span>
+        }
+    });
+}
+
+
+lspProcess.on(<span class="hljs-string">&#x27;message&#x27;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">json</span>) </span>{
+    <span class="hljs-built_in">console</span>.log(json);
+});
+initialize();</code></pre>
+				<a href="#standard-inputoutput" id="standard-inputoutput" style="color: inherit; text-decoration: none;">
+					<h3>Standard Input/Output</h3>
+				</a>
+				<p>When writing directly to the process&#39;s stdin, the additional <code>Content-Length</code>
+					header must be included. Similarly, when reading from the process&#39;s stdout, the
+				header will be included in the response message.</p>
+				<pre><code class="language-TypeScript"><span class="hljs-keyword">import</span> * <span class="hljs-keyword">as</span> child_process <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;child_process&quot;</span>;
+
+<span class="hljs-keyword">let</span> lspProcess = child_process.spawn(<span class="hljs-string">&quot;node&quot;</span>, [ <span class="hljs-string">&quot;out/src/server.js&quot;</span>, <span class="hljs-string">&quot;--stdio&quot;</span> ]);
+<span class="hljs-keyword">let</span> messageId = <span class="hljs-number">1</span>;
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">send</span>(<span class="hljs-params">method: <span class="hljs-built_in">string</span>, params: <span class="hljs-built_in">object</span></span>) </span>{
+    <span class="hljs-keyword">let</span> message = {
+        <span class="hljs-attr">jsonrpc</span>: <span class="hljs-string">&quot;2.0&quot;</span>,
+        <span class="hljs-attr">id</span>: messageId++,
+        method: method,
+        <span class="hljs-attr">params</span>: params
+    };
+    <span class="hljs-keyword">let</span> json = <span class="hljs-built_in">JSON</span>.stringify(message);
+    <span class="hljs-keyword">let</span> headers = <span class="hljs-string">&quot;Content-Length: &quot;</span> + json.length + <span class="hljs-string">&quot;\r\n\r\n&quot;</span>;
+    lspProcess.stdin.write(headers, <span class="hljs-string">&quot;ASCII&quot;</span>);
+    lspProcess.stdin.write(json, <span class="hljs-string">&quot;UTF-8&quot;</span>);
+}
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">initialize</span>(<span class="hljs-params"></span>) </span>{
+    send(<span class="hljs-string">&quot;initialize&quot;</span>, {
+        <span class="hljs-attr">rootPath</span>: process.cwd(),
+        <span class="hljs-attr">processId</span>: process.pid,
+        <span class="hljs-attr">capabilities</span>: {
+            <span class="hljs-comment">/* ... */</span>
+        }
+    });
+}
+
+lspProcess.stdout.on(<span class="hljs-string">&quot;data&quot;</span>, <span class="hljs-function">(<span class="hljs-params">message</span>) =&gt;</span> {
+    <span class="hljs-comment">// &quot;Content-Length: ...\r\n\r\n\&quot; will be included here</span>
+    <span class="hljs-built_in">console</span>.log(message.toString());
+});
+
+initialize();</code></pre>
+				<a href="#vscode-jsonrpc" id="vscode-jsonrpc" style="color: inherit; text-decoration: none;">
+					<h4>vscode-jsonrpc</h4>
+				</a>
+				<p>The <code>StreamMessageReader</code> and <code>StreamMessageWriter</code> classes from the
+					<code>vscode-jsonrpc</code> module will handle the <code>Content-Length</code> headers for you so you
+				only have to worry about the actual request and response.</p>
+				<pre><code class="language-TypeScript"><span class="hljs-keyword">import</span> * <span class="hljs-keyword">as</span> child_process <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;child_process&quot;</span>;
+<span class="hljs-keyword">import</span> { StreamMessageReader, StreamMessageWriter } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;vscode-jsonrpc&quot;</span>;
+
+<span class="hljs-keyword">let</span> lspProcess = child_process.spawn(<span class="hljs-string">&quot;node&quot;</span>, [ <span class="hljs-string">&quot;out/src/server.js&quot;</span>, <span class="hljs-string">&quot;--stdio&quot;</span> ]);
+<span class="hljs-keyword">let</span> messageId = <span class="hljs-number">1</span>;
+
+<span class="hljs-keyword">const</span> reader = <span class="hljs-keyword">new</span> StreamMessageReader(lspProcess.stdout);
+<span class="hljs-keyword">const</span> writer = <span class="hljs-keyword">new</span> StreamMessageWriter(lspProcess.stdin);
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">send</span>(<span class="hljs-params">method: <span class="hljs-built_in">string</span>, params: <span class="hljs-built_in">object</span></span>) </span>{
+    <span class="hljs-keyword">let</span> message = {
+        <span class="hljs-attr">jsonrpc</span>: <span class="hljs-string">&quot;2.0&quot;</span>,
+        <span class="hljs-attr">id</span>: messageId++,
+        method: method,
+        <span class="hljs-attr">params</span>: params
+    };
+    writer.write(message);
+}
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">initialize</span>(<span class="hljs-params"></span>) </span>{
+    send(<span class="hljs-string">&quot;initialize&quot;</span>, {
+        <span class="hljs-attr">rootPath</span>: process.cwd(),
+        <span class="hljs-attr">processId</span>: process.pid,
+        <span class="hljs-attr">capabilities</span>: {
+            <span class="hljs-comment">/* ... */</span>
+        }
+    });
+}
+
+reader.listen(<span class="hljs-function">(<span class="hljs-params">data</span>) =&gt;</span> {
+    <span class="hljs-built_in">console</span>.log(data);
+})
+
+initialize();</code></pre>
+				<a href="#sockets" id="sockets" style="color: inherit; text-decoration: none;">
+					<h3>Sockets</h3>
+				</a>
+				<p>To communicate with the langauge server via a socket, a port must be opened
+					up first to listen for incoming connections. After the port is opened, the
+					language server may be started and told to connect to the specified port.
+				Messages can then be read from and written to the socket.</p>
+				<p>Just like when trying to communicate to the server using
+					<a href="#standard-inputoutput">stdio</a>, the <code>Content-Length</code> headers must be written
+				and parsed explicitly.</p>
+				<pre><code class="language-TypeScript"><span class="hljs-keyword">import</span> * <span class="hljs-keyword">as</span> net <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;net&quot;</span>
+<span class="hljs-keyword">import</span> * <span class="hljs-keyword">as</span> child_process <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;child_process&quot;</span>
+
+<span class="hljs-keyword">let</span> messageId = <span class="hljs-number">1</span>;
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">send</span>(<span class="hljs-params">socket: net.Socket, method: <span class="hljs-built_in">string</span>, params: <span class="hljs-built_in">object</span></span>) </span>{
+    <span class="hljs-keyword">let</span> message = {
+        <span class="hljs-attr">jsonrpc</span>: <span class="hljs-string">&quot;2.0&quot;</span>,
+        <span class="hljs-attr">id</span>: messageId++,
+        method: method,
+        <span class="hljs-attr">params</span>: params
+    };
+    <span class="hljs-keyword">let</span> json = <span class="hljs-built_in">JSON</span>.stringify(message) + <span class="hljs-string">&quot;\n&quot;</span>;
+    <span class="hljs-keyword">let</span> headers = <span class="hljs-string">&quot;Content-Length: &quot;</span> + json.length + <span class="hljs-string">&quot;\r\n\r\n&quot;</span>;
+    socket.write(headers, <span class="hljs-string">&quot;ASCII&quot;</span>);
+    socket.write(json, <span class="hljs-string">&quot;UTF-8&quot;</span>);
+}
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">initialize</span>(<span class="hljs-params">socket: net.Socket</span>) </span>{
+    send(socket, <span class="hljs-string">&quot;initialize&quot;</span>, {
+        <span class="hljs-attr">rootPath</span>: process.cwd(),
+        <span class="hljs-attr">processId</span>: process.pid,
+        <span class="hljs-attr">capabilities</span>: {
+            <span class="hljs-attr">textDocument</span>: {
+                <span class="hljs-comment">/* ... */</span>
+            },
+            <span class="hljs-attr">workspace</span>: {
+                <span class="hljs-comment">/* ... */</span>
+            }
+        }
+    });
+}
+
+<span class="hljs-keyword">const</span> server = net.createServer(<span class="hljs-function">(<span class="hljs-params">socket: net.Socket</span>) =&gt;</span> {
+    server.close();
+    socket.on(<span class="hljs-string">&quot;data&quot;</span>, <span class="hljs-function">(<span class="hljs-params">message</span>) =&gt;</span> {
+        <span class="hljs-comment">// &quot;Content-Length: ...\r\n\r\n\&quot; will be included here</span>
+        <span class="hljs-built_in">console</span>.log(message.toString());
+    });
+    initialize(socket);
+});
+
+server.listen(<span class="hljs-number">3000</span>, <span class="hljs-function">() =&gt;</span> {
+    child_process.spawn(<span class="hljs-string">&quot;node&quot;</span>, [ <span class="hljs-string">&quot;out/src/server.js&quot;</span>, <span class="hljs-string">&quot;--socket=3000&quot;</span> ]);
+});</code></pre>
+				<a href="#vscode-jsonrpc-1" id="vscode-jsonrpc-1" style="color: inherit; text-decoration: none;">
+					<h4>vscode-jsonrpc</h4>
+				</a>
+				<p>The <code>SocketMessageReader</code> and <code>SocketMessageWriter</code> classes from the
+					<code>vscode-jsonrpc</code> module will handle the <code>Content-Length</code> headers for you so you
+				only have to worry about the actual request and response.</p>
+				<pre><code class="language-TypeScript"><span class="hljs-keyword">import</span> * <span class="hljs-keyword">as</span> net <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;net&quot;</span>
+<span class="hljs-keyword">import</span> * <span class="hljs-keyword">as</span> child_process <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;child_process&quot;</span>
+<span class="hljs-keyword">import</span> { SocketMessageReader, SocketMessageWriter } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;vscode-jsonrpc&quot;</span>;
+
+<span class="hljs-keyword">let</span> messageId = <span class="hljs-number">1</span>;
+<span class="hljs-keyword">let</span> reader: SocketMessageReader = <span class="hljs-literal">null</span>;
+<span class="hljs-keyword">let</span> writer: SocketMessageWriter = <span class="hljs-literal">null</span>;
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">send</span>(<span class="hljs-params">method: <span class="hljs-built_in">string</span>, params: <span class="hljs-built_in">object</span></span>) </span>{
+    <span class="hljs-keyword">let</span> message = {
+        <span class="hljs-attr">jsonrpc</span>: <span class="hljs-string">&quot;2.0&quot;</span>,
+        <span class="hljs-attr">id</span>: messageId++,
+        method: method,
+        <span class="hljs-attr">params</span>: params
+    };
+    writer.write(message);
+}
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">initialize</span>(<span class="hljs-params"></span>) </span>{
+    send(<span class="hljs-string">&quot;initialize&quot;</span>, {
+        <span class="hljs-attr">rootPath</span>: process.cwd(),
+        <span class="hljs-attr">processId</span>: process.pid,
+        <span class="hljs-attr">capabilities</span>: {
+            <span class="hljs-attr">textDocument</span>: {
+                <span class="hljs-comment">/* ... */</span>
+            },
+            <span class="hljs-attr">workspace</span>: {
+                <span class="hljs-comment">/* ... */</span>
+            }
+        }
+    });
+}
+
+<span class="hljs-keyword">const</span> server = net.createServer(<span class="hljs-function">(<span class="hljs-params">socket: net.Socket</span>) =&gt;</span> {
+    server.close();
+    reader = <span class="hljs-keyword">new</span> SocketMessageReader(socket);
+    reader.listen(<span class="hljs-function">(<span class="hljs-params">data</span>) =&gt;</span> {
+        <span class="hljs-built_in">console</span>.log(data);
+    });
+    writer = <span class="hljs-keyword">new</span> SocketMessageWriter(socket);
+    initialize();
+});
+
+server.listen(<span class="hljs-number">3000</span>, <span class="hljs-function">() =&gt;</span> {
+    child_process.spawn(<span class="hljs-string">&quot;node&quot;</span>, [ <span class="hljs-string">&quot;out/src/server.js&quot;</span>, <span class="hljs-string">&quot;--socket=3000&quot;</span> ]);
+});</code></pre>
+			</div>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class="globals  ">
+						<a href="globals.html"><em>Globals</em></a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_server_.html">&quot;server&quot;</a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer class="with-border-bottom">
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
+				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="container tsd-generator">
+	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
+</div>
+<div class="overlay"></div>
+<script src="assets/js/main.js"></script>
+</body>
+</html>
